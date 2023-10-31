@@ -1,0 +1,86 @@
+﻿@model Practice_Web.Models.Entity.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <legend>LogIn</legend>
+
+                <div>
+                    Account：@Html.EditorFor(m => m.Account, ViewBag.IsLoginSuccess == "true" ? new { htmlAttributes = new { disabled = "disabled" } } : null)
+                    <font color="red">@Html.ValidationMessageFor(m => m.Account)</font>
+                </div>
+
+                <br />
+                @if (ViewBag.IsLoginSuccess == "true") { Model.Password = ""; }
+                <div>
+                    Password：@Html.EditorFor(m => m.Password, ViewBag.IsLoginSuccess == "true" ? new { htmlAttributes = new { disabled = "disabled" } } : null)
+                    <font color="red">@Html.ValidationMessageFor(m => m.Password)</font>
+                </div>
+
+                <br />
+                @if (ViewBag.IsLoginSuccess == "true")
+                {
+                    <div style="color:green">@ViewBag.ServerMSG</div>
+                }
+                else
+                {
+                    <div style="color:red">@ViewBag.ServerMSG</div>
+                }
+
+                <br />
+                <div>
+                    @if (ViewBag.IsLoginSuccess == "true")
+                    {
+                        @*<input type="button" value="Logout" onclick="location.href='@Url.Action("Index", "Home", Session["LoggedUser"] = null)'" />
+                            <input type="button" value="Change password" onclick="location.href='@Url.Action("ChangePassword", "Home", Model)'" />*@
+                        <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Home")'" />
+                        <input type="button" value="Change password" onclick="location.href='@Url.Action("ChangePassword", "Home")'" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Login" />
+                        <input type="button" value="Register" onclick="location.href='@Url.Action("Register", "Home")'" />
+                    }
+                </div>
+            </fieldset>
+        }
+    </div>
+
+    @*<script>
+            function onClick_1() {
+                '<%= Session["LoggedUser"] %>' = null;
+                window.location.href = '../index.html';
+
+                @{
+                    System.Diagnostics.Debug.WriteLine("aaaaa");
+
+                    if (Session["LoggedUser"] != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine(((Practice_Web.Models.Entity.User)Session["LoggedUser"]).ID);
+                        System.Diagnostics.Debug.WriteLine(((Practice_Web.Models.Entity.User)Session["LoggedUser"]).Account);
+                        System.Diagnostics.Debug.WriteLine(((Practice_Web.Models.Entity.User)Session["LoggedUser"]).Password);
+                        System.Diagnostics.Debug.WriteLine(((Practice_Web.Models.Entity.User)Session["LoggedUser"]).IsEnabled);
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Session[\"LoggedUser\"] is null");
+                    }
+                }
+            }
+        </script>*@
+
+</body>
+</html>

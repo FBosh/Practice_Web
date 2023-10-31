@@ -1,0 +1,49 @@
+﻿@model Practice_Web.Models.Entity.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <legend>Register</legend>
+
+                <div>
+                    Account：@Html.EditorFor(m => m.Account)
+                    <font color="red">@Html.ValidationMessageFor(m => m.Account)</font>
+                </div>
+
+                <br />
+                <div>
+                    Password：@Html.EditorFor(m => m.Password)
+                    <font color="red">@Html.ValidationMessageFor(m => m.Password)</font>
+                </div>
+
+                @*<br />
+                    <div>
+                        Confirm Password：@Html.EditorFor(m => m.ConfirmPassword)
+                        <font color="red">@Html.ValidationMessageFor(m => m.ConfirmPassword)</font>
+                    </div>*@
+
+                <br />
+                <div style="color:red">@ViewBag.ServerMSG</div>
+
+                <br />
+                <div>
+                    <input type="submit" value="Confirm" />
+                </div>
+            </fieldset>
+        }
+    </div>
+</body>
+</html>
